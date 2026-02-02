@@ -47,9 +47,11 @@ const updateBook = () => {
 
   spreads.forEach((spread, index) => {
     const turn = clamp(pagePosition - index, 0, 1);
+    const isActive = index === spreadIndex;
     spread.style.setProperty("--turn", turn.toFixed(3));
     spread.style.zIndex = spreads.length - index;
-    spread.classList.toggle("is-active", index === spreadIndex);
+    spread.style.opacity = isActive ? "1" : "0";
+    spread.classList.toggle("is-active", isActive);
   });
 };
 
