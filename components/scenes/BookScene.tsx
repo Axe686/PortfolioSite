@@ -1,14 +1,14 @@
 "use client";
 
 import { useCallback, useRef } from "react";
-import type { gsap } from "gsap";
 
+import type { ScrollSceneTimelineBuilder } from "@/lib/animations/useScrollScene";
 import { useScrollScene } from "@/lib/animations/useScrollScene";
 
 export function BookScene() {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const buildTimeline = useCallback((timeline: gsap.core.Timeline) => {
+  const buildTimeline = useCallback<ScrollSceneTimelineBuilder>((timeline) => {
     timeline
       .fromTo(
         ".cover",
