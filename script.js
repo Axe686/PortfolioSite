@@ -13,8 +13,8 @@ const updateBook = () => {
   const progress = totalScroll === 0 ? 0 : scrolled / totalScroll;
 
   const openingStart = 0.08;
-  const openingEnd = 0.82;
-  const closingStart = 0.82;
+  const openingEnd = 0.78;
+  const closingStart = 0.78;
   const closingEnd = 1;
 
   let openProgress = 0;
@@ -37,14 +37,18 @@ const updateBook = () => {
   const spreadProgress = clamp(
     (progress - openingStart) / (closingStart - openingStart),
     0,
-    0.999
+    1
   );
+  const pagePosition = spreadProgress * spreads.length;
   const spreadIndex = Math.min(
     spreads.length - 1,
-    Math.floor(spreadProgress * spreads.length)
+    Math.floor(pagePosition)
   );
 
   spreads.forEach((spread, index) => {
+    const turn = clamp(pagePosition - index, 0, 1);
+    spread.style.setProperty("--turn", turn.toFixed(3));
+    spread.style.zIndex = spreads.length - index;
     spread.classList.toggle("is-active", index === spreadIndex);
   });
 };
