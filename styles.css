@@ -89,6 +89,8 @@ body {
   padding: 2.2rem;
   display: grid;
   place-items: center;
+  opacity: var(--pages-visibility, 0);
+  transition: opacity 0.35s ease;
 }
 
 .spread {

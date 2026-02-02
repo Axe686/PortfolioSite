@@ -13,9 +13,7 @@ const updateBook = () => {
   const progress = totalScroll === 0 ? 0 : scrolled / totalScroll;
 
   const openingStart = 0.08;
-  const openingEnd = 0.82;
-  const closingStart = 0.82;
-  const closingEnd = 1;
+  const openingEnd = 0.45;
 
   let openProgress = 0;
 
@@ -24,18 +22,20 @@ const updateBook = () => {
   } else if (progress < openingEnd) {
     openProgress = (progress - openingStart) / (openingEnd - openingStart);
   } else {
-    openProgress = 1 - (progress - closingStart) / (closingEnd - closingStart);
+    openProgress = 1;
   }
 
   openProgress = clamp(openProgress, 0, 1);
   const eased = ease(openProgress);
   const scale = lerp(0.7, 1.08, eased);
+  const pagesVisibility = clamp((openProgress - 0.1) / 0.5, 0, 1);
 
   book.style.setProperty("--book-open", eased.toFixed(3));
   book.style.setProperty("--book-scale", scale.toFixed(3));
+  book.style.setProperty("--pages-visibility", pagesVisibility.toFixed(3));
 
   const spreadProgress = clamp(
-    (progress - openingStart) / (closingStart - openingStart),
+    (progress - openingStart) / (1 - openingStart),
     0,
     0.999
   );
