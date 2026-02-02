@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --bg: #f5f0e6;
+  --bg-2: #efe6d6;
+  --text: #1f1f1f;
+  --muted: #5c5c5c;
+  --line: #d8c8b0;
+  --accent: #b87333;
+  --accent-2: #6b2d2d;
+  --card: #fbf7ef;
+  --shadow: rgba(20, 20, 20, 0.12);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-card: var(--card);
+  --color-shadow: var(--shadow);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  z-index: 0;
+}
+
+main,
+section,
+header,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif), "Times New Roman", serif;
+  letter-spacing: -0.01em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.container {
+  width: min(1200px, 92vw);
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  line-height: 1.1;
+}
+
+.scene-panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 60px var(--shadow);
+  border-radius: 24px;
+}
+
+@media (max-width: 768px) {
+  .scene-panel {
+    border-radius: 18px;
+  }
+}
