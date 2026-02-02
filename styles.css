@@ -59,6 +59,16 @@ body {
   transition: transform 0.1s linear;
 }
 
+.book::before {
+  content: "";
+  position: absolute;
+  inset: 1.8rem 2.4rem;
+  background: linear-gradient(120deg, #f7f4ee 0%, #ece6d9 100%);
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 1px rgba(27, 34, 51, 0.12);
+  transform: translateZ(-2px);
+}
+
 .cover {
   position: absolute;
   top: 0;
@@ -83,12 +93,37 @@ body {
   transform: rotateY(calc(var(--book-open, 0) * 160deg));
 }
 
+.cover-text {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  gap: 0.35rem;
+  padding: 2rem;
+  color: #f3f4f6;
+  letter-spacing: 0.04em;
+}
+
+.cover-title {
+  font-size: clamp(1.4rem, 2.6vw, 2.4rem);
+  font-weight: 700;
+}
+
+.cover-subtitle {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
 .spreads {
   position: absolute;
   inset: 0;
   padding: 2.2rem;
   display: grid;
   place-items: center;
+  opacity: var(--book-open, 0);
+  transition: opacity 0.3s ease;
 }
 
 .spread {
@@ -98,12 +133,17 @@ body {
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   opacity: 0;
-  transform: translateZ(-1px);
-  transition: opacity 0.35s ease;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transform: translateZ(-1px) rotateY(calc(var(--turn, 0) * -180deg));
+  transition: transform 0.6s ease, opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .spread.is-active {
   opacity: 1;
+  z-index: 10;
+  pointer-events: auto;
 }
 
 .page {
@@ -115,6 +155,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  backface-visibility: hidden;
 }
 
 .page h2 {
