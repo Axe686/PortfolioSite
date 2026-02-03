@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-
 import type { Service } from "@/data/services";
 import { Button } from "@/components/ui/button";
 
@@ -9,10 +8,17 @@ interface ServiceSectionProps {
   scene: React.ReactNode;
 }
 
+/**
+ * Универсальный блок для страницы услуги. Включает описание,
+ * bullets, список того, что входит, анимационную сцену и кейсы.
+ * Ссылки ведут на общую форму обратной связи на главной странице и на
+ * внутренний якорь с кейсами.
+ */
 export function ServiceSection({ service, scene }: ServiceSectionProps) {
   return (
-    <section id={service.id} className="py-24">
+    <section className="py-24">
       <div className="container space-y-12">
+        {/* Основной блок с описанием */}
         <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-start">
           <div className="space-y-6">
             <p className="text-sm uppercase tracking-[0.3em] text-muted">
@@ -45,16 +51,17 @@ export function ServiceSection({ service, scene }: ServiceSectionProps) {
             </div>
             <div className="flex flex-wrap gap-3">
               <Button asChild>
-                <Link href="#contact">Обсудить проект</Link>
+                <Link href="/#contact">Обсудить проект</Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link href={`#${service.id}-cases`}>Посмотреть кейсы</Link>
+                <Link href="#cases">Посмотреть кейсы</Link>
               </Button>
             </div>
           </div>
           <div>{scene}</div>
         </div>
-        <div id={`${service.id}-cases`} className="grid gap-6">
+        {/* Блок с кейсами и результатом */}
+        <div id="cases" className="grid gap-6">
           <div className="grid gap-4 md:grid-cols-3">
             {service.cases.map((item) => (
               <article key={item.title} className="scene-panel p-5">
@@ -79,8 +86,8 @@ export function ServiceSection({ service, scene }: ServiceSectionProps) {
               <h3 className="text-xl font-semibold">{service.resultTitle}</h3>
               <p className="text-sm text-muted">{service.resultDescription}</p>
             </div>
-            <Button asChild>
-              <Link href="#contact">Обсудить проект</Link>
+              <Button asChild>
+              <Link href="/#contact">Обсудить проект</Link>
             </Button>
           </div>
         </div>
