@@ -2,12 +2,13 @@
 
 import { useCallback, useRef } from "react";
 
+import type { ScrollSceneTimelineBuilder } from "@/lib/animations/useScrollScene";
 import { useScrollScene } from "@/lib/animations/useScrollScene";
 
 export function TextScene() {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const buildTimeline = useCallback((timeline) => {
+  const buildTimeline = useCallback<ScrollSceneTimelineBuilder>((timeline) => {
     timeline
       .fromTo(
         ".type-line",

@@ -12,9 +12,11 @@ interface ScrollSceneOptions {
   scrub?: boolean | number;
 }
 
+export type ScrollSceneTimelineBuilder = (timeline: gsap.core.Timeline) => void;
+
 export function useScrollScene(
   container: RefObject<HTMLDivElement | null>,
-  buildTimeline: (timeline: gsap.core.Timeline) => void,
+  buildTimeline: ScrollSceneTimelineBuilder,
   options: ScrollSceneOptions = {}
 ) {
   const prefersReducedMotion = usePrefersReducedMotion();
